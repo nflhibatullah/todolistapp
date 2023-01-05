@@ -2,7 +2,7 @@ package entity
 
 import "gorm.io/gorm"
 
-type ToDo struct {
+type Todo struct {
 	gorm.Model
 	ActivityGroupID int64  `json:"activity_group_id"`
 	Title           string `json:"title"`

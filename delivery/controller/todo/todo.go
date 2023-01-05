@@ -32,7 +32,7 @@ func (ac TodoController) CreateTodo() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, common.ErrorResponse("Bad Request", "activity_group_id cannot be null"))
 		}
 
-		var todoData = &entity.ToDo{
+		var todoData = &entity.Todo{
 			ActivityGroupID: data.ActivityGroupID,
 			Title:           data.Title,
 			IsActive:        data.IsActive,
@@ -130,7 +130,7 @@ func (ac TodoController) UpdateTodo() echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, common.ErrorResponse("Id must be a number", err.Error()))
 		}
 
-		var todo = &entity.ToDo{Title: data.Title, Priority: data.Priority, IsActive: data.IsActive, ActivityGroupID: data.ActivityGroupID}
+		var todo = &entity.Todo{Title: data.Title, Priority: data.Priority, IsActive: data.IsActive, ActivityGroupID: data.ActivityGroupID}
 		todo.ID = uint(id)
 		todo.UpdatedAt = time.Now()
 

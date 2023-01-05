@@ -10,10 +10,10 @@ type (
 		db *gorm.DB
 	}
 	TodoRepository interface {
-		CreateTodo(todo *entity.ToDo) (*entity.ToDo, error)
-		GetTodoByID(id int64) (*entity.ToDo, error)
-		GetAllTodo(groupId int64) ([]*entity.ToDo, error)
-		UpdateTodo(todo *entity.ToDo) (*entity.ToDo, error)
+		CreateTodo(todo *entity.Todo) (*entity.Todo, error)
+		GetTodoByID(id int64) (*entity.Todo, error)
+		GetAllTodo(groupId int64) ([]*entity.Todo, error)
+		UpdateTodo(todo *entity.Todo) (*entity.Todo, error)
 		DeleteTodoByID(id int64) error
 	}
 )
@@ -24,7 +24,7 @@ func NewTodoRepository(db *gorm.DB) TodoRepository {
 	}
 }
 
-func (t *Todo) CreateTodo(todo *entity.ToDo) (*entity.ToDo, error) {
+func (t *Todo) CreateTodo(todo *entity.Todo) (*entity.Todo, error) {
 	tx := t.db.Create(todo)
 
 	if tx.Error != nil {
@@ -34,8 +34,8 @@ func (t *Todo) CreateTodo(todo *entity.ToDo) (*entity.ToDo, error) {
 	return todo, nil
 }
 
-func (t *Todo) GetTodoByID(id int64) (*entity.ToDo, error) {
-	var todo = &entity.ToDo{}
+func (t *Todo) GetTodoByID(id int64) (*entity.Todo, error) {
+	var todo = &entity.Todo{}
 	tx := t.db.First(&todo, id)
 
 	if tx.Error != nil {
@@ -45,9 +45,9 @@ func (t *Todo) GetTodoByID(id int64) (*entity.ToDo, error) {
 	return todo, nil
 }
 
-func (t *Todo) GetAllTodo(groupId int64) ([]*entity.ToDo, error) {
+func (t *Todo) GetAllTodo(groupId int64) ([]*entity.Todo, error) {
 	var (
-		todos []*entity.ToDo
+		todos []*entity.Todo
 		tx    *gorm.DB
 	)
 
@@ -64,9 +64,9 @@ func (t *Todo) GetAllTodo(groupId int64) ([]*entity.ToDo, error) {
 	return todos, nil
 }
 
-func (t *Todo) UpdateTodo(todo *entity.ToDo) (*entity.ToDo, error) {
+func (t *Todo) UpdateTodo(todo *entity.Todo) (*entity.Todo, error) {
 
-	var result = &entity.ToDo{}
+	var result = &entity.Todo{}
 	tx := t.db.First(result, todo.ID).Updates(todo)
 
 	if tx.Error != nil {
@@ -77,7 +77,7 @@ func (t *Todo) UpdateTodo(todo *entity.ToDo) (*entity.ToDo, error) {
 }
 
 func (t *Todo) DeleteTodoByID(id int64) error {
-	var todo = &entity.ToDo{}
+	var todo = &entity.Todo{}
 	tx := t.db.First(todo, id).Delete(todo, id)
 
 	if tx.Error != nil {

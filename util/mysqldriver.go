@@ -35,5 +35,5 @@ func InitDB(config *config.AppConfig) *gorm.DB {
 
 func InitMigrate(db *gorm.DB) {
 	db.AutoMigrate(&entity.Activity{})
-	db.AutoMigrate(&entity.ToDo{})
+	db.AutoMigrate(&entity.Todo{})
 }
